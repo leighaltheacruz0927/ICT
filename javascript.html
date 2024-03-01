@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Interactive Quiz</title>
+<style>
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #FFE8E4;
+  }
+  header {
+    background-color: #FFC4BA;
+    color: #ffffff;
+    padding: 20px 0;
+    text-align: center;
+  }
+  #quiz-container {
+    text-align: center;
+    margin: 20px auto;
+    max-width: 600px;
+  }
+  .question {
+    font-size: 30px;
+    margin-bottom: 20px;
+  }
+  .options button {
+    padding: 10px 20px;
+    margin: 5px;
+    font-size: 16px;
+    cursor: pointer;
+  } 
+
+</style>
+</head>
+<body>
+<header>
+        <h1>INTERACTIVE QUIZ</h1>
+	<p>ICT activity</p>
+    </header>
+
+
+<div id="quiz-container">
+  <div class="question" id="question"></div>
+  <div class="options" id="options"></div>
+</div>
+
+<script>
+const questions = [
+  {
+    question: "What is the biggest country in the world?",
+    options: ["Oman", "Russia", "China", "Madrid"],
+    answer: "Russia"
+  },
+  {
+    question: "How many planets are there?",
+    options: ["4", "8", "12", "16"],
+    answer: "8"
+  },
+  {
+    question: "Who discovered the Philippies?",
+    options: ["Ferdinand Magellan", "Ferdinand Marcos", "Jose Rizal", "Andres Bonifacio"],
+    answer: "Mitochondria"
+  },
+  {
+    question: "How many islands are in tthe Philippines?",
+    options: ["7107", "205", "7641", "0"],
+    answer: "7641"
+  },
+  {
+    question: "How many bones are in a human body?",
+    options: ["222", "143", "300", "206"],
+    answer: "206"
+  }
+];
+
+let currentQuestion = 0;
+
+function displayQuestion() {
+  const questionElement = document.getElementById('question');
+  const optionsElement = document.getElementById('options');
+  
+  questionElement.textContent = questions[currentQuestion].question;
+  optionsElement.innerHTML = '';
+  
+  questions[currentQuestion].options.forEach(option => {
+    const button = document.createElement('button');
+    button.textContent = option;
+    button.addEventListener('click', () => checkAnswer(option));
+    optionsElement.appendChild(button);
+  });
+}
+
+function checkAnswer(selectedOption) {
+  const correctAnswer = questions[currentQuestion].answer;
+  if (selectedOption === correctAnswer) {
+    alert("Correct!");
+  } else {
+    alert("Incorrect!");
+  }
+  
+  currentQuestion++;
+  if (currentQuestion < questions.length) {
+    displayQuestion();
+  } else {
+    alert("Quiz Over!");
+  }
+}
+
+displayQuestion();
+</script>
+</body>
+</html>
